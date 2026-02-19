@@ -3,7 +3,7 @@
 import { shelbyClient } from "@/utils/shelbyClient";
 import { useStorageAccount } from "@shelby-protocol/solana-kit/react";
 import { useWalletConnection } from "@solana/react-hooks";
-import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { memo, useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { toast } from "sonner";
 
