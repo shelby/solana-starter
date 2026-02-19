@@ -23,7 +23,7 @@ Learn more at [shelby.xyz](https://shelby.xyz)
 
 ### Prerequisites
 
-- Node.js 18+
+- Node.js 22+
 - pnpm, npm, or yarn
 - A Solana wallet browser extension (Solflare, Phantom, etc.)
 

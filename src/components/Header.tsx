@@ -3,8 +3,9 @@
 import { shelbyClient } from "@/utils/shelbyClient";
 import { useStorageAccount } from "@shelby-protocol/solana-kit/react";
 import { useWalletConnection } from "@solana/react-hooks";
-import { memo, useEffect, useMemo, useRef, useState } from "react";
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { toast } from "sonner";
 
 function formatAddress(address?: string) {
   if (!address) return "Not connected";
@@ -120,6 +121,7 @@ export const Header = memo(function Header({ currentStep }: HeaderProps) {
                   onClick={() => {
                     if (walletAddress) {
                       navigator.clipboard.writeText(walletAddress);
+                      toast.success("Wallet address copied");
                     }
                   }}
                   className="p-1.5 rounded hover:bg-white/10 transition text-white/60 hover:text-white"
@@ -161,6 +163,7 @@ export const Header = memo(function Header({ currentStep }: HeaderProps) {
                       navigator.clipboard.writeText(
                         storageAccountAddress.toString(),
                       );
+                      toast.success("Storage address copied");
                     }
                   }}
                   className="p-1.5 rounded hover:bg-white/10 transition text-white/60 hover:text-white"
