@@ -118,9 +118,9 @@ export const Header = memo(function Header({ currentStep }: HeaderProps) {
                 </span>
                 <button
                   type="button"
-                  onClick={() => {
+                  onClick={async () => {
                     if (walletAddress) {
-                      navigator.clipboard.writeText(walletAddress);
+                      await navigator.clipboard.writeText(walletAddress);
                       toast.success("Wallet address copied");
                     }
                   }}
@@ -158,9 +158,9 @@ export const Header = memo(function Header({ currentStep }: HeaderProps) {
                 </span>
                 <button
                   type="button"
-                  onClick={() => {
+                  onClick={async () => {
                     if (storageAccountAddress) {
-                      navigator.clipboard.writeText(
+                      await navigator.clipboard.writeText(
                         storageAccountAddress.toString(),
                       );
                       toast.success("Storage address copied");
