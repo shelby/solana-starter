@@ -49,19 +49,24 @@ export const BlobUploader = memo(function BlobUploader({
     }
   }, [fundedStorageAddress]);
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      const isDuplicate = uploadedBlobs.some((blob) => blob.name === file.name);
-      if (isDuplicate) {
-        setStatusMessage(`A blob named "${file.name}" already exists.`);
-        event.target.value = "";
-        return;
+  const handleFileChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const file = event.target.files?.[0];
+      if (file) {
+        const isDuplicate = uploadedBlobs.some(
+          (blob) => blob.name === file.name,
+        );
+        if (isDuplicate) {
+          setStatusMessage(`A blob named "${file.name}" already exists.`);
+          event.target.value = "";
+          return;
+        }
+        setSelectedFile(file);
+        setStatusMessage(null);
       }
-      setSelectedFile(file);
-      setStatusMessage(null);
-    }
-  };
+    },
+    [uploadedBlobs],
+  );
 
   const handleUpload = useCallback(async () => {
     if (!selectedFile || !storageAccountAddress || !signAndSubmitTransaction)
@@ -237,9 +242,9 @@ export const BlobUploader = memo(function BlobUploader({
             Uploaded Blobs
           </h3>
           <div className="space-y-2">
-            {uploadedBlobs.map((blob, index) => (
+            {uploadedBlobs.map((blob) => (
               <div
-                key={`${blob.name}-${index}`}
+                key={blob.name}
                 className="p-3 bg-white/5 rounded-lg border border-white/10"
               >
                 <div className="flex items-center justify-between">
